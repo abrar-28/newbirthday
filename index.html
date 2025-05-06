@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Special Surprise</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Courier New', Courier, monospace;
+      overflow: hidden;
+      background: linear-gradient(-45deg, #fceabb, #f8b500, #ff9a9e, #fad0c4);
+      background-size: 400% 400%;
+      animation: gradientMove 10s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      text-align: center;
+      z-index: 2;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    #typewriter {
+      color: white;
+      font-size: 2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid white;
+      animation: blink 0.75s step-end infinite;
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: white }
+    }
+
+    .heart-btn {
+      font-size: 1rem;
+      background: white;
+      color: red;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-weight: bold;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+
+    .heart-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .gift-box {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+      animation: pop 0.6s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0 }
+      100% { transform: scale(1); opacity: 1 }
+    }
+
+    .gift-emoji {
+      font-size: 90px;
+      animation: float 3s ease-in-out infinite;
+      margin-bottom: 10px;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .message {
+      display: none;
+      margin-top: 15px;
+      color: white;
+      font-size: 1.6rem;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .emoji-row {
+      font-size: 50px;
+      margin-top: 10px;
+      animation: float 2.5s infinite ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="typewriter"></h1>
+    <button class="heart-btn" id="heartBtn" style="display: none;">Click Here ❤️</button>
+
+    <div class="gift-box" id="giftBox">
+      <div class="gift-emoji">🎁</div>
+      <div class="message" id="giftMessage">
+        🎉 Happy Birthday Buddy! 🎂<br/>
+        Wishing you all the love, laughter, and cake today! 🧸💕<br/>
+        You're cherished more than you know.
+        <div class="emoji-row">🎈🎊🧁</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const typewriter = document.getElementById("typewriter");
+    const heartBtn = document.getElementById("heartBtn");
+    const giftBox = document.getElementById("giftBox");
+    const giftMessage = document.getElementById("giftMessage");
+
+    const initialMsg = "I have something special for you...";
+    let i = 0;
+
+    function typeEffect() {
+      if (i < initialMsg.length) {
+        typewriter.innerHTML += initialMsg.charAt(i);
+        i++;
+        setTimeout(typeEffect, 70);
+      } else {
+        heartBtn.style.display = "inline-block";
+      }
+    }
+
+    heartBtn.addEventListener("click", () => {
+      giftBox.style.display = "flex";
+      setTimeout(() => {
+        giftMessage.style.display = "block";
+      }, 800);
+    });
+
+    typeEffect();
+  </script>
+</body>
+</html>
